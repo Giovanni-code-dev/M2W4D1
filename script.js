@@ -118,6 +118,7 @@ const jobs = [
         title: "English Teacher Abroad",
         location: "US, NY, Saint Bonaventure",
     },
+    
 ]
 
 function searchJobs(jobsProp, jobTitle, jobLocation) {
@@ -148,29 +149,24 @@ if (htmlFormElement) {
         const risultato = searchJobs(jobs, inputJobValue, inputLocationValue);
 
         const searchResultList = document.getElementById("searchResultList");
-        searchResultList.innerHTML = ""; // Pulizia della tabella prima di aggiungere i nuovi dati
-
+        searchResultList.innerHTML = ""; 
         if (risultato.result.length === 0) {
             searchResultList.innerHTML = `<tr><td colspan="2" style="text-align: center;">Nessun risultato trovato</td></tr>`;
             return;
         }
 
         risultato.result.forEach(element => {
-            const row = document.createElement('tr'); // Crea la riga
+            const row = document.createElement('tr'); 
 
-            // Crea la cella per il titolo del lavoro
             const jobTitleCell = document.createElement('td');
             jobTitleCell.textContent = element.title;
 
-            // Crea la cella per la location del lavoro
             const locationCell = document.createElement('td');
             locationCell.textContent = element.location;
 
-            // Aggiungi le celle alla riga
             row.appendChild(jobTitleCell);
             row.appendChild(locationCell);
 
-            // Aggiungi la riga alla tabella
             searchResultList.appendChild(row);
         });
     });
