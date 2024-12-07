@@ -1,19 +1,24 @@
+
 html,
 body {
     background-color: #1e4a95;
     margin: 0;
     padding: 0;
-
     font-family: sans-serif;
 }
-
+p {
+   margin-top: 12px;
+    color: purple;
+}
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: -20px;
+    color: #1e4a95;
 }
 
 /* Disporre gli elementi del modulo in una riga orizzontale */
 form {
+    
     display: flex;
     flex-direction: row;
     /* Disporre gli elementi in fila orizzontale */
@@ -37,7 +42,7 @@ form {
 
 /* Pulsante con stile */
 .gruppo button {
-    background-color: #444;
+    background-color: purple;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -51,17 +56,18 @@ form {
 }
 
 .gruppo button:hover {
-    background-color: #666;
+    background-color:rgb(69, 21, 113);
 }
 
 .container {
+    
     max-width: 600px;
     /* Larghezza massima del riquadro */
     margin: 20px auto;
     /* Centrare il riquadro */
     padding: 20px;
     /* Spazio interno */
-    background-color: #fff;
+    background-color:whitesmoke;
     /* Sfondo del riquadro */
     border-radius: 10px;
     /* Angoli arrotondati */
@@ -97,9 +103,10 @@ td {
 
 th {
     text-align: center;
-    background-color: #444;
+    background-color: #37383a;
     color: white;
     border-radius: 6px;
+    font-size:large;
 }
 
 tr:hover {
