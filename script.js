@@ -1,5 +1,4 @@
-/*
-PARTE 1: 
+/*PARTE 1: 
 Oggi analizzeremo un problema molto comune: realizzare algoritmi di ricerca.
 Il tuo compito è creare una funzione che cercherà per posizione lavorativa E posizione geografica. Questi due valori verranno passati come parametri
 Ti abbiamo fornito un array chiamato "jobs" in fondo al file, NON modificarlo in alcun modo.
@@ -21,18 +20,6 @@ REQUISITI:
 }
 
 - la tua ricerca deve essere "case insensitive" (non deve essere influenzata da lettere maiuscole o minuscole nelle parole cercate). Questo e' possibile trasformando tutto in lettere minuscole con .toLowerCase()
-
-
-
-
-
-
-
-
-
-
-
-
 PARTE 2: 
 Nella pagina HTML, inserisci 2 input di tipo testo (uno per la location e uno per il titolo lavorativo, ricordati di diversificarli con un id) e un bottone con valore “cerca”
 
@@ -46,12 +33,6 @@ Dopo aver raccolto ed elaborato i dati, e’ il momento di mostrare i risultati 
 */
 
 // NON MODIFICARE QUESTO ARRAY!
-
-
-
-
-
-
 const jobs = [
     { title: "Marketing Intern", location: "US, NY, New York" },
     {
@@ -139,28 +120,58 @@ const jobs = [
     },
 ]
 
-
-
-
 function searchJobs(jobsProp, jobTitle, jobLocation) {
     const titleLower = jobTitle.toLowerCase();
     const locationLower = jobLocation.toLowerCase();
 
-    const resultSearch = jobsProp.filter((e) =>{
-         if (e.title.toLowerCase().includes(titleLower) && e.location.toLowerCase().includes(locationLower)){
-            return true
-         }
-         return false
-        
-        
-        })
-  
+    const resultSearch = jobsProp.filter((e) =>
+        e.title.toLowerCase().includes(titleLower) &&
+        e.location.toLowerCase().includes(locationLower)
+    );
+
     return {
         count: resultSearch.length,
         result: resultSearch
     }
 }
 
-const res = searchJobs(jobs,"software", "US")
+const htmlFormElement = document.getElementById("formId");
 
-console.log(res)
+if (htmlFormElement) {
+    htmlFormElement.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(htmlFormElement);
+        const inputJobValue = formData.get("jobTitle") || '';
+        const inputLocationValue = formData.get("jobLocation") || '';
+
+        const risultato = searchJobs(jobs, inputJobValue, inputLocationValue);
+
+        const searchResultList = document.getElementById("searchResultList");
+        searchResultList.innerHTML = ""; // Pulizia della tabella prima di aggiungere i nuovi dati
+
+        if (risultato.result.length === 0) {
+            searchResultList.innerHTML = `<tr><td colspan="2" style="text-align: center;">Nessun risultato trovato</td></tr>`;
+            return;
+        }
+
+        risultato.result.forEach(element => {
+            const row = document.createElement('tr'); // Crea la riga
+
+            // Crea la cella per il titolo del lavoro
+            const jobTitleCell = document.createElement('td');
+            jobTitleCell.textContent = element.title;
+
+            // Crea la cella per la location del lavoro
+            const locationCell = document.createElement('td');
+            locationCell.textContent = element.location;
+
+            // Aggiungi le celle alla riga
+            row.appendChild(jobTitleCell);
+            row.appendChild(locationCell);
+
+            // Aggiungi la riga alla tabella
+            searchResultList.appendChild(row);
+        });
+    });
+}
