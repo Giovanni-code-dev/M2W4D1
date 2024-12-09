@@ -146,10 +146,7 @@ if (htmlFormElement) {
         const inputJobValue = formData.get("jobTitle") || '';
         const inputLocationValue = formData.get("jobLocation") || '';
 
-
-      
-
-        const risultato = searchJobs(jobs, inputJobValue, inputLocationValue);
+        const finalResult = searchJobs(jobs, inputJobValue, inputLocationValue);
 
         const searchResultList = document.getElementById("searchResultList");
         searchResultList.innerHTML = ""; 
@@ -158,12 +155,12 @@ if (htmlFormElement) {
             return;
           }
 
-        if (risultato.result.length === 0) {
+        if (finalResult.result.length === 0) {
             searchResultList.innerHTML = `<tr><td colspan="2" style="text-align: center;">Nessun risultato trovato</td></tr>`;
             return;
         }
 
-        risultato.result.forEach(element => {
+        finalResult.result.forEach(element => {
             const row = document.createElement('tr'); 
 
             const jobTitleCell = document.createElement('td');
