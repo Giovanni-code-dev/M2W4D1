@@ -146,10 +146,18 @@ if (htmlFormElement) {
         const inputJobValue = formData.get("jobTitle") || '';
         const inputLocationValue = formData.get("jobLocation") || '';
 
+
+      
+
         const risultato = searchJobs(jobs, inputJobValue, inputLocationValue);
 
         const searchResultList = document.getElementById("searchResultList");
         searchResultList.innerHTML = ""; 
+
+        if (inputJobValue === "" && inputLocationValue === "") {
+            return;
+          }
+
         if (risultato.result.length === 0) {
             searchResultList.innerHTML = `<tr><td colspan="2" style="text-align: center;">Nessun risultato trovato</td></tr>`;
             return;
@@ -171,3 +179,4 @@ if (htmlFormElement) {
         });
     });
 }
+console.log(searchJobs)
